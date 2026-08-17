@@ -1,13 +1,13 @@
 import React from "react";
 
-// Import SVGs as React components using the ?react query parameter
-import KanoteRight from "../../assets/kanote/top_right.svg?react";
-import KanoteBottomLeft from "../../assets/kanote/bottom_left.svg?react";
+// Import SVGs as plain URLs (rendered with <img>)
+import KanoteRight from "../../assets/kanote/top_right.svg";
+import KanoteBottomLeft from "../../assets/kanote/bottom_left.svg";
 
-import ClubSymbol from "../../assets/symbol/club.svg?react";
-import DiamondSymbol from "../../assets/symbol/diamond.svg?react";
-import HeartSymbol from "../../assets/symbol/heart.svg?react";
-import SpadeSymbol from "../../assets/symbol/spade.svg?react";
+import ClubSymbol from "../../assets/symbol/club.svg";
+import DiamondSymbol from "../../assets/symbol/diamond.svg";
+import HeartSymbol from "../../assets/symbol/heart.svg";
+import SpadeSymbol from "../../assets/symbol/spade.svg";
 
 import { type CardRank, type CardSuit } from "../../types";
 
@@ -19,7 +19,7 @@ interface BurmeseCardProps {
 	faceDown?: boolean;
 }
 
-const suitMap: Record<CardSuit, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const suitMap: Record<CardSuit, string> = {
 	club: ClubSymbol,
 	diamond: DiamondSymbol,
 	heart: HeartSymbol,
@@ -33,7 +33,7 @@ export const BurmeseCard: React.FC<BurmeseCardProps> = ({
 	size = "lg",
 	faceDown = false,
 }) => {
-	const SuitIcon = suitMap[suit];
+	const suitIconPath = suitMap[suit];
 	const characterPath = `/character/${rank}.svg`;
 
 	const isRedSuit = suit === "heart" || suit === "diamond";
@@ -81,14 +81,18 @@ export const BurmeseCard: React.FC<BurmeseCardProps> = ({
 						{rankText}
 					</span>
 				)}
-				<SuitIcon
+				<img
+					src={suitIconPath}
+					alt=""
 					className={iconClass}
 					style={{ filter: kanoteFilter }}
 				/>
 			</div>
 
 			{/* Top-Right Kanote (Increased Size & Positioned Flushed Corner) */}
-			<KanoteRight
+			<img
+				src={KanoteRight}
+				alt=""
 				className={`absolute top-1 right-1 ${kanoteClass} pointer-events-none z-10`}
 				style={{ filter: kanoteFilter }}
 			/>
@@ -103,7 +107,9 @@ export const BurmeseCard: React.FC<BurmeseCardProps> = ({
 			</div>
 
 			{/* Bottom-Left Kanote (Increased Size & Positioned Flushed Corner) */}
-			<KanoteBottomLeft
+			<img
+				src={KanoteBottomLeft}
+				alt=""
 				className={`absolute bottom-1 left-1 ${kanoteClass} pointer-events-none z-10`}
 				style={{ filter: kanoteFilter }}
 			/>
@@ -117,7 +123,9 @@ export const BurmeseCard: React.FC<BurmeseCardProps> = ({
 						{rankText}
 					</span>
 				)}
-				<SuitIcon
+				<img
+					src={suitIconPath}
+					alt=""
 					className={iconClass}
 					style={{ filter: kanoteFilter }}
 				/>
